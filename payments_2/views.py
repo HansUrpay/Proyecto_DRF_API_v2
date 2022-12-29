@@ -4,7 +4,7 @@ from .serializer import PaymentUserSerializer, ExpiredPaymentSerializer
 from rest_framework.permissions import IsAuthenticated, IsAdminUser
 
 # Create your views here.
-class PaymentView(viewsets.ModelViewSet):
+class PaymentUserView(viewsets.ModelViewSet):
     queryset = PaymentUser.objects.all()
     serializer_class = PaymentUserSerializer
     # pagination_class = Pagination_own
@@ -12,14 +12,20 @@ class PaymentView(viewsets.ModelViewSet):
     # filterset_fields = ["payment_date", "expiration_date"]
     # throttle_scope = 'payments'
 
+    def create(self, request):
+        serializer = PaymentUserSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+
+
 class ExpiredPaymentView(viewsets.ModelViewSet):
     queryset = ExpiredPayment.objects.all()
     serializer_class = ExpiredPaymentSerializer
     # pagination_class = Pagination_own
     # throttle_scope = 'all'
 
-    # def get_permissions(self, request):
-    #     if request.method == "GET":
+    # def get_permissions(self):
+    #     if self.request.method == "GET":
     #         return [IsAuthenticated()]
-    #     if request.method == "POST":
+    #     if self.request.method == "POST":
     #         return [IsAdminUser]

@@ -17,7 +17,7 @@ class PaymentUser(models.Model):
 class ExpiredPayment(models.Model):
     payment_user_id = models.ForeignKey(PaymentUser, on_delete=models.CASCADE)
     penalty_fee_amount = models.DecimalField(max_digits=10, decimal_places=2)
-    user_id = models.ForeignKey(User, on_delete=models.CASCADE)
+    user_id = models.ForeignKey(User, on_delete=models.CASCADE, default=1)
     service_id = models.ForeignKey(Services, on_delete=models.CASCADE, default=1)
     amount = models.DecimalField(max_digits=10, decimal_places=2, default=0)
 
