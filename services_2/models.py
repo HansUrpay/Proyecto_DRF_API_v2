@@ -8,7 +8,7 @@ class Services(models.Model):
     prefijo = models.CharField(max_length=3 , default= '--')
 
     class Meta:
-        db_table = 'Servicios'
+        db_table = 'services_2'
 
     def __str__(self) -> str:
       return self.name
