@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'django_filters',
+    'drf_yasg',
     'services_2',
     'payments_2',
     'users_2',
@@ -128,5 +129,16 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 REST_FRAMEWORK = {
-    "DEFAULT_FILTER_BACKENDS": ["django_filters.rest_framework.DjangoFilterBackend"]
+    "DEFAULT_FILTER_BACKENDS": ["django_filters.rest_framework.DjangoFilterBackend"],
+    "DEFAULT_THROTTLE_CLASSES":[
+        "rest_framework.throttling.AnonRateThrottle", # permisos de peticiones para usuarios anonimos
+        "rest_framework.throttling.UserRateThrottle", # permisos de peticiones para usuarios logueados
+		'rest_framework.throttling.ScopedRateThrottle' # throtle_rates general
+    ],
+    "DEFAULT_THROTTLE_RATES":{
+        "anon":"2000/day", #cantidad de peticiones para usuarios anonimos
+        "user":"2000/day", #cantidad de peticiones para usuarios logueados
+		"payments":"1000/dia", #cantidad de peticiones para vista de pagos
+		"all":"2000/day",
+    }
 }

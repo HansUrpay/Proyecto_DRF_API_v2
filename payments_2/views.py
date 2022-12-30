@@ -17,7 +17,7 @@ class PaymentUserView(viewsets.ModelViewSet):
     filter_backends = [DjangoFilterBackend]
     # se indica los campos de filtro
     filterset_fields = ["payment_date", "expiration_date"]
-    # throttle_scope = 'payments'
+    throttle_scope = 'payments'
 
     def create(self, request):
         serializer = PaymentUserSerializer(data=request.data)
@@ -61,7 +61,7 @@ class ExpiredPaymentView(viewsets.ModelViewSet):
     queryset = ExpiredPayment.objects.all()
     serializer_class = ExpiredPaymentSerializer
     pagination_class = ExpiredPaymentPagination
-    # throttle_scope = 'all'
+    throttle_scope = 'all'
 
     # def get_permissions(self):
     #     if self.request.method == "GET":

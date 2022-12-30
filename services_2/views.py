@@ -10,7 +10,6 @@ from rest_framework import status
 class ServicesView(ModelViewSet):
     queryset = Services.objects.all()
     serializer_class = ServicesSerializer
-    # throttle_classes = 'all'
 
     def get_permissions(self):
         if self.request.method == "GET":
