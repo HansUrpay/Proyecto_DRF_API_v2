@@ -20,6 +20,7 @@ from rest_framework.routers import DefaultRouter
 from payments_2.views import PaymentUserView, ExpiredPaymentView
 from services_2.views import ServicesView
 from users_2.views import UserCreateView, UserListView
+from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 
 from django.urls import re_path
 from rest_framework import permissions
@@ -55,8 +56,8 @@ urlpatterns = [
     re_path(r'^swagger/$', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
     re_path(r'^redoc/$', schema_view.with_ui('redoc', cache_timeout=0), name='schema-redoc'),
 
-    # path("token/", TokenObtainPairView.as_view(), name="get_token"),
-    # path("token/refresh/", TokenRefreshView.as_view(),  name="refresh_token"),
+    path("token/", TokenObtainPairView.as_view(), name="get_token"),
+    path("token/refresh/", TokenRefreshView.as_view(),  name="refresh_token"),
 ]
 
 urlpatterns += router.urls
