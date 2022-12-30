@@ -63,9 +63,9 @@ class ExpiredPaymentView(viewsets.ModelViewSet):
     pagination_class = ExpiredPaymentPagination
     throttle_scope = 'all'
 
-    def get_permissions(self):
-        if self.request.method == "GET":
-            return [IsAuthenticated()]
-        if self.request.method == "POST":
-            return [IsAdminUser()]
-        return [IsAdminUser()]
+    # def get_permissions(self):
+    #     if self.request.method == "GET":
+    #         return [IsAuthenticated()]
+    #     if self.request.method == "POST":
+    #         return [IsAdminUser()]
+    #     return [IsAdminUser()]
