@@ -5,14 +5,18 @@ from .models import PaymentUser, ExpiredPayment
 from .serializer import PaymentUserSerializer, ExpiredPaymentSerializer
 from rest_framework.permissions import IsAuthenticated, IsAdminUser
 from .pagination import PaymentUserPagination, ExpiredPaymentPagination
+from django_filters.rest_framework import DjangoFilterBackend
 
 # Create your views here.
 class PaymentUserView(viewsets.ModelViewSet):
     queryset = PaymentUser.objects.all()
     serializer_class = PaymentUserSerializer
+    # se usa la clase previamente creada para la paginacion
     pagination_class = PaymentUserPagination
-    # filter_backends = [DjangoFilterBackend]
-    # filterset_fields = ["payment_date", "expiration_date"]
+    # usa modulo de filtros de rest_framework por default
+    filter_backends = [DjangoFilterBackend]
+    # se indica los campos de filtro
+    filterset_fields = ["payment_date", "expiration_date"]
     # throttle_scope = 'payments'
 
     def create(self, request):
