@@ -48,6 +48,7 @@ router.register(r"expired_payments", ExpiredPaymentView, basename="expired_payme
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+     path('', include('users_2.urls')),
     path('users/all', UserListView.as_view(), name="users_list"),
     path('users', UserCreateView.as_view(), name="users_create"),
 
